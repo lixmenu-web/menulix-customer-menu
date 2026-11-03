@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">MenuLix - Customer Menu</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .menu-loading { display:flex; justify-content:center; padding:4rem 0; }
+    .menu-spinner { width:44px; height:44px; border:3px solid #e8ddd5;
+      border-top-color:#FF7A00; border-radius:50%;
+      animation:spin .7s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+
+    <div class="hero-top-bar">
+      <button class="hero-btn hero-btn-outline" onclick="openLang()" data-i18n="buttons.language">Language</button>
+      <button class="hero-btn hero-btn-fill" onclick="openFeedback()" data-i18n="buttons.feedback">Feedback</button>
+    </div>
+
+    <div class="hero-content">
+      <img id="heroLogo" class="hero-logo-img" style="display: none;" alt="Restaurant Logo" />
+      <div class="hero-eyebrow" id="heroEyebrow">Restaurant</div>
+      <h1 class="hero-title" id="heroTitle">
+        Menu<span>Lix</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-tagline" id="heroTagline">Quality food, crafted with care</p>
+      <a class="hero-phone" id="heroPhone" href="#" style="display: none;" aria-label="Phone" data-i18n-attr="aria-label:labels.phone">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+        </svg>
+        <span data-i18n="labels.phone">Phone</span>
+        <span id="heroPhoneText"></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- STICKY NAV -->
+  <nav class="sticky-nav" id="stickyNav" aria-label="Menu categories" data-i18n-attr="aria-label:labels.menuCategories">
+    <div class="nav-inner" id="navInner"></div>
+  </nav>
+
+  <!-- MENU CONTENT -->
+  <main id="menuMain">
+    <div class="menu-loading">
+      <div class="menu-spinner"></div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <img id="footerLogo" class="footer-logo-img" style="display: none;" alt="Restaurant Logo" />
+    <div class="footer-logo" id="footerTitle">Menu<span>Lix</span></div>
+    <p class="footer-tagline" id="footerTagline">Fine Food Daily</p>
+    <a class="footer-phone" id="footerPhone" href="#" style="display: none;" aria-label="Phone" data-i18n-attr="aria-label:labels.phone">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+      </svg>
+      <span data-i18n="labels.phone">Phone</span>
+      <span id="footerPhoneText"></span>
+    </a>
+    <p class="footer-copy" id="footerCopy">© 2026 MenuLix · All rights reserved</p>
+  </footer>
+
+  <!-- SCROLL-TO-TOP -->
+  <button
+    class="scroll-top"
+    id="scrollTopBtn"
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    aria-label="Back to top"
+    data-i18n-attr="aria-label:buttons.backToTop"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </button>
+
+  <!-- LANGUAGE MODAL -->
+  <div class="overlay" id="langOverlay" onclick="closeAll(event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="languageTitle">
+      <span class="modal-close" onclick="closeAll()" aria-label="Close" data-i18n-attr="aria-label:buttons.close">×</span>
+      <h2 id="languageTitle" data-i18n="modals.languageTitle">Choose Language</h2>
+      <p data-i18n="modals.languageDescription">Choose your preferred menu language.</p>
+      <div class="lang-list">
+        <button class="lang-opt" data-lang="en">English 🇺🇸</button>
+        <button class="lang-opt" data-lang="ar">العربية 🇮🇶</button>
+        <button class="lang-opt" data-lang="ku">کوردی 🇹🇯</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK MODAL -->
+  <div class="overlay" id="feedbackOverlay" onclick="closeAll(event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+      <span class="modal-close" onclick="closeAll()" aria-label="Close" data-i18n-attr="aria-label:buttons.close">×</span>
+      <h2 id="feedbackTitle" data-i18n="modals.feedbackTitle">Share Feedback</h2>
+      <p data-i18n="modals.feedbackDescription">How was your experience? We'd love to hear from you.</p>
+      <div class="feedback-form" id="feedbackForm"></div>
+    </div>
+  </div>
+
+  <!-- ITEM DETAILS MODAL -->
+  <div class="overlay" id="itemDetailsOverlay" onclick="closeAll(event)">
+    <div class="modal item-details-modal" role="dialog" aria-modal="true" aria-labelledby="itemDetailsTitle">
+      <span class="modal-close" onclick="closeAll()" aria-label="Close" data-i18n-attr="aria-label:buttons.close">×</span>
+      <div class="item-details-icon" id="itemDetailsIcon" aria-hidden="true"></div>
+      <h2 id="itemDetailsTitle"></h2>
+      <p class="item-details-price" id="itemDetailsPrice"></p>
+      <h3 data-i18n="modals.itemDetailsContains">Details</h3>
+      <ul class="item-details-list" id="itemDetailsList"></ul>
+    </div>
+  </div>
+
+  <!-- Firebase Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <!-- Firebase Config & Firestore Service -->
+  <script src="firebase-config.js"></script>
+  <script src="firestore.js"></script>
+
+  <!-- Main Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>

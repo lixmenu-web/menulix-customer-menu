@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MenuLix - Welcome</title>
+</head>
+<body>
+  <script>
+    // Forward any query parameters (such as restaurantId) to landing.html
+    const query = window.location.search;
+    window.location.replace('landing.html' + query);
+  </script>
+  <noscript>
+    <a href="landing.html">Open MenuLix welcome page</a>
+  </noscript>
+</body>
+</html>
